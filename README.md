@@ -1,2 +1,3 @@
-#DanielMVC
-This is my Blogging Theme. Still work in progress.
+# PHP MVC Blog
+
+More infos soon about key features of the blogging application. 
