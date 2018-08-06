@@ -1,6 +1,4 @@
 <?php
-    $data = $this->data;
-
     $postErr = isset($this->post_err) ? true : false;
     $postErrMsg = isset($this->post_err) ? $this->post_err : '';
 ?>
@@ -18,20 +16,24 @@
 
     <h2>Edit Post</h2>
     <p>Edit your post with this form</p>
-    <?php Debug::add($data['id']); ?>
-    <form action="<?php echo URL; ?>posts/doEdit/<?php echo $data['id'] ?>" method="POST">
+    <?php foreach($this->post as $item): ?>
+    <form action="<?php echo URL; ?>posts/doEdit/<?= $item->id ?>" method="POST">
 
         <div class="form-group">
             <label for="title">Title: <sup>*</sup></label>
-            <input type="text" name="header" class="form-control form-control-lg" value="">
+            <input type="text" name="header" class="form-control form-control-lg" value="<?= $item->header ?>">
         </div>         
 
         <div class="form-group">
             <label for="body">Body: <sup>*</sup></label>
-            <textarea name="content" class="form-control form-control-lg">  </textarea>
+            <textarea name="content" class="form-control form-control-lg"><?= $item->content ?></textarea>
         </div>
         <input type="submit" class="btn btn-success" value="Submit">
     </form>
+    <?php endforeach; ?>
 </div>
+
+
+
 
 

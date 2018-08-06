@@ -29,32 +29,34 @@ class Posts extends Controller {
         $this->view->render('posts/show');
     }
 
-    public function doEdit() {
-        $user = $_POST;
-
-        $user['id'] = $id;
-        $user['header'] = trim($user['header']);
-        $user['content'] = trim($user['content']);
-
-        $data = $this->model->getPosts();
-        $this->view->data = $data;
+    public function doEdit($id) {        
         
-        if(empty($user['header']) || empty($user['content'])) {
+        $post = $_POST;
+        $post['id'] = $id;
+        $post['header'] = trim($post['header']);
+        $post['content'] = trim($post['content']);
+        
+        if(empty($post['header']) || empty($post['content'])) {
             $this->view->post_err = 'Please fill out the complete form';
             return $this->edit();
         }
-        
-        $this->model->updatePost($user);
 
-        // header('Location: ' . URL . 'posts');
+        $this->view->post = $post;
+        $this->model->updatePost($post);
+
+        header('Location: ' . URL . 'posts');
     }
 
     public function delete($id) {
-                
         $this->model->deletePost($id);
     }
 
-    public function edit() {
+    public function edit($id) {
+
+        $post = $this->model->getPostById($id);
+
+        $this->view->post = $post;
+
         $this->view->render('posts/edit');
     }
 

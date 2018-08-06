@@ -10,7 +10,7 @@
 </div>
 <p><?php echo $data[0]->content; ?></p>
 
-<!-- < php if($data['post']->user_id == $_SESSION['user_id']) : ?> -->
+<!-- < php if($data['0']->user_id == $_SESSION['user_id']) : ?> -->
     <hr>
     <a href="<?php echo URL; ?>posts/edit/<?php echo $data[0]->id; ?>" class="btn btn-dark">Edit</a>
 
