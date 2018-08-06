@@ -51,4 +51,25 @@ class Posts_Model extends Model {
     
         return false;
     }
+
+    public function updatePost($data) {
+        $sql = "UPDATE posts SET header = :header, content = :content WHERE id = :id";
+
+        $obj = $this->db->prepare($sql);
+
+        $obj->execute(array(
+            ":id" => $data["id"],
+            ":header" => $data["header"],
+            ":content" => $data["content"]
+        ));
+    }
+
+    public function deletePost($id) {
+        $sql = "DELETE FROM posts WHERE id = :id";
+        $obj = $this->db->prepare($sql);
+        $obj->execute(array(
+            ":id" => $id
+        ));
+    }
+
 }
