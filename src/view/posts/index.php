@@ -17,6 +17,7 @@
             </div>
 
             <p class="card-text"><?php echo $item->content; ?></p>
-            <a href="<?php echo URL; ?>/posts/show/<?php echo $item->postId; ?>" class="btn btn-dark">More</a>
+            <a href="<?php echo URL; ?>posts/show/<?php echo $item->id; ?>" class="btn btn-dark">More</a>
         </div>
     <?php endforeach; ?>
+

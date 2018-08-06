@@ -35,6 +35,20 @@ class Posts_Model extends Model {
         return false;
     }
 
+    public function getPostById($id) {
+        $sql = "SELECT * FROM posts WHERE id = :id";
 
+        $obj = $this->db->prepare($sql);
 
+        $obj->execute(array(
+            ":id" => $id
+        ));
+        
+        if($obj->rowCount() > 0) {
+            $data = $obj->fetchAll(PDO::FETCH_OBJ);
+            return $data;
+        }
+    
+        return false;
+    }
 }

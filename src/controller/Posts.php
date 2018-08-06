@@ -19,8 +19,14 @@ class Posts extends Controller {
         $this->model->addPost($user);
 
         header('Location: ' . URL . 'posts');
+    }
 
-        $this->add();
+    public function show($id) {
+        $data = $this->model->getPostById($id);
+
+        $this->view->data = $data;
+
+        $this->view->render('posts/show');
     }
 
     public function add() {
