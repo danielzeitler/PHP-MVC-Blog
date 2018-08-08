@@ -19,4 +19,12 @@ class Session {
         unset($_SESSION[$key]);
     }
 
+      public static function isLoggedIn() {
+        if(isset($_SESSION['user']['id'])) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
 }

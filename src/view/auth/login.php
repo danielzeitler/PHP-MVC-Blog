@@ -6,8 +6,7 @@
 <div class="row">
     <div class="col-md-6 mx-auto">
         <div class="card card-body bg-light mt-5">
-            <!-- Flash message einbauen -->
-            <!-- php flash('register_success'); ?> -->
+
             <!-- Error alert -->
             <?php if($emailError) : ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">

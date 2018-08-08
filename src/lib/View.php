@@ -17,6 +17,8 @@ class View {
 
             require 'partial/navbar.php';
 
+            require 'partial/message.php';
+
             require 'view/' . $name . '.php';
 
             // Check DEBUG_MODE (config)

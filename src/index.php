@@ -15,6 +15,9 @@ if (DEBUG_MODE) {
 include 'lib/Debug.php';
 
 
+include 'lib/Message.php';
+
+
 
 
 

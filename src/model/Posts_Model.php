@@ -67,9 +67,11 @@ class Posts_Model extends Model {
     public function deletePost($id) {
         $sql = "DELETE FROM posts WHERE id = :id";
         $obj = $this->db->prepare($sql);
-        $obj->execute(array(
+        $result = $obj->execute(array(
             ":id" => $id
         ));
+
+        return $result;
     }
 
 }

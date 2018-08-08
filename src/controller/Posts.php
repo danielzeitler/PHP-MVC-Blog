@@ -17,7 +17,7 @@ class Posts extends Controller {
         }
 
         $this->model->addPost($user);
-
+        
         header('Location: ' . URL . 'posts');
     }
 
@@ -43,17 +43,38 @@ class Posts extends Controller {
 
         $this->view->post = $post;
         $this->model->updatePost($post);
-
+        Message::add('Post updated');
         header('Location: ' . URL . 'posts');
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #               Header redirect bug
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - -
     }
 
     public function delete($id) {
-        $this->model->deletePost($id);
+        $post = $this->model->getPostById($id);
+
+     
+            $this->model->deletePost($id);
+            // Message::add('Post deleted');
+     
+            Message::add('Not authorized to delete this post', 'danger');
+           # header('Location: ' . URL . 'posts');
+
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #               Header redirect bug
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        
     }
 
     public function edit($id) {
 
         $post = $this->model->getPostById($id);
+
+        // if($post[0]->user_id != $_SESSION['user']['id']) {
+        //     header('Location: ' . URL . 'posts');
+        // }
 
         $this->view->post = $post;
 
@@ -65,6 +86,7 @@ class Posts extends Controller {
     }
 
     public function index() {
+
         $data = $this->model->getPosts();
         
         $this->view->post = $data;

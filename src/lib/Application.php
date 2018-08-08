@@ -15,6 +15,13 @@ class Application {
         $url[0] = ucfirst($url[0]);
 
         //------------------------------------------------------
+        // Message subsystem
+
+        $messageId = isset($_GET['deleteMessage']) ? $_GET['deleteMessage'] : null;
+
+        Message::remove($messageId);
+
+        //------------------------------------------------------
         // Autoload controller
         $file = 'controller/' . $url[0] . '.php';
         if (file_exists($file)) {
@@ -61,6 +68,11 @@ class Application {
         //---------------------------------------------------------
         // Rendering
         $controller->index();
+
+        
+
+
+
 
 
     }

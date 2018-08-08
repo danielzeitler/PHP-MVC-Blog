@@ -58,12 +58,13 @@ class Auth extends Controller {
 
             // Make sure errors are empty
             if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])) {
+                Session::flash('register_success', 'You are registered and can log in');
                 header('Location: ' . URL . 'auth/login');
                 // Validated
                 $this->model->registerUser($user);
             }
         } 
-        $this->view->user = $data;
+        $this->view->data = $data;
         $this->register();
     }
 
