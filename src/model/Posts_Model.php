@@ -7,13 +7,14 @@ class Posts_Model extends Model {
     }
 
     public function addPost($data) {
-        $sql = 'INSERT INTO posts(header, content) VALUES (:header, :content)';
+        $sql = 'INSERT INTO posts(header, content, user_id) VALUES (:header, :content, :user_id)';
         
         $obj = $this->db->prepare($sql);
         
         $result = $obj->execute(array(
             ":header" => $data['header'],
-            ":content" => $data['content']
+            ":content" => $data['content'],
+            ":user_id" => $_SESSION['user']['id'],
         ));
         
         return $result;
@@ -21,7 +22,7 @@ class Posts_Model extends Model {
 
     public function getPosts() {
 
-        $sql = 'SELECT * FROM posts WHERE 1';
+        $sql = 'SELECT user.firstname, user.lastname, posts.* FROM user JOIN posts ON user.id = posts.user_id;';
 
         $obj = $this->db->prepare($sql);
 
@@ -36,7 +37,7 @@ class Posts_Model extends Model {
     }
 
     public function getPostById($id) {
-        $sql = "SELECT * FROM posts WHERE id = :id";
+        $sql = "SELECT user.firstname, user.lastname, posts.* FROM user JOIN posts ON user.id = posts.user_id WHERE posts.id = :id";
 
         $obj = $this->db->prepare($sql);
 

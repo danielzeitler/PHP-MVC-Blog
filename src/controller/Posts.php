@@ -65,10 +65,6 @@ class Posts extends Controller {
 
         $post = $this->model->getPostById($id);
 
-        // if($post[0]->user_id != $_SESSION['user']['id']) {
-        //     header('Location: ' . URL . 'posts');
-        // }
-
         $this->view->post = $post;
 
         $this->view->render('posts/edit');

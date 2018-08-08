@@ -13,7 +13,7 @@
         <div class="card card-body mb-3">
             <h4 class="card-title"><?= $item->header; ?></h4>
             <div class="bg-light p-2 mb-3">
-                Written by <?= $item->user_id ?> on <?= $item->timestamp;?>
+                Written by <?= $item->firstname . " " . $item->lastname ?> on <?= $item->timestamp;?>
             </div>
 
             <p class="card-text"><?= $item->content; ?></p>

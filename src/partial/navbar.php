@@ -21,7 +21,7 @@
         <ul class="navbar-nav ml-auto">
             <?php if(Session::get('user')): ?>
             <li class="nav-item">
-                <a class="nav-link" href="#">Welcome <?= Session::get('user')['fullname'] ?></a>
+                <a class="nav-link" href="#">Welcome <?= Session::get('user')['firstname'] ?></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?=URL?>auth/logout">Logout</a>
