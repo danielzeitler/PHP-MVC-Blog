@@ -3,9 +3,11 @@
             <h1>Posts</h1>
         </div>
         <div class="col-md-6">
+        <?php if(Session::isLoggedIn()) : ?>
             <a href="<?= URL; ?>posts/add" class="btn btn-primary pull-right">
                 <i class="fa fa-pencil"></i> Add Post
             </a>
+        <?php endif; ?>
         </div>
     </div>
 
