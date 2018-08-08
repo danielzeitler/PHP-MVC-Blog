@@ -17,6 +17,8 @@ class Posts extends Controller {
         }
 
         $this->model->addPost($user);
+
+        Message::add('Perfect! New post has been added to your blog');
         
         header('Location: ' . URL . 'posts');
     }
@@ -46,9 +48,7 @@ class Posts extends Controller {
         Message::add('Post updated');
         header('Location: ' . URL . 'posts');
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        #               Header redirect bug
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     }
 
     public function delete($id) {
@@ -56,16 +56,9 @@ class Posts extends Controller {
 
      
             $this->model->deletePost($id);
-            // Message::add('Post deleted');
      
-            Message::add('Not authorized to delete this post', 'danger');
-           # header('Location: ' . URL . 'posts');
-
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        #               Header redirect bug
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        
+            Message::add('Post deleted', 'danger');
+            header('Location: ' . URL . 'posts');
     }
 
     public function edit($id) {

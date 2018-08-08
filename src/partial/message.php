@@ -8,7 +8,7 @@
 
     <div class="alert alert-<?= $value['class'] ?>" data-time="<?= $value['time'] ?>" data-duration="<?= $value['duration'] ?>"><?= $value['text'] ?>
     
-        <a type="button" class="close" href="?deleteMessage=<?= $key ?>" aria-label="Close">
+        <a class="close" href="?deleteMessage=<?= $key ?>" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </a>
     </div>
