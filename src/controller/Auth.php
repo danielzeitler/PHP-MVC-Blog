@@ -66,6 +66,7 @@ class Auth extends Controller {
         } 
         $this->view->data = $data;
         $this->register();
+        
     }
 
     public function logout() {

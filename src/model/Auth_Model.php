@@ -25,16 +25,16 @@ class Auth_Model extends Model {
             'password' => $user['password']
         ));
 
-        //Get userEntry from DB
-        $userEntry = $this->getUserFromEmail($user['email']);
+        // //Get userEntry from DB
+        // $userEntry = $this->getUserFromEmail($user['email']);
 
-        //Check if user exists (and early return if not)
-        if (!$userEntry) {
-            // return false;
-            echo "User existiert";
-        } else {
-            echo "User existiert nicht";
-        }
+        // //Check if user exists (and early return if not)
+        // if (!$userEntry) {
+        //     // return false;
+        //     echo "User existiert";
+        // } else {
+        //     echo "User existiert nicht";
+        // }
             
     }
 
@@ -115,6 +115,5 @@ class Auth_Model extends Model {
         return false;
     }
 
-
-
+    
 }
