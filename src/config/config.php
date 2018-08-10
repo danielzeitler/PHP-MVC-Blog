@@ -27,3 +27,11 @@ define('MAXIMUM_LOGINS', 3);
 //---------------------------------------------------------
 
 define('SITENAME', 'DanielMVC');
+
+//---------------------------------------------------------
+
+define('IMAGE_UPLOADS_PATH', 'uploads/images');
+define('IMAGE_DEFAULT_EXT', '.jpg');
+define('IMAGE_THUMB_EXT', '-thumb');
+define('IMAGE_THUMB_WIDTH', 200);
+define('IMAGE_THUMB_HEIGHT', 200);

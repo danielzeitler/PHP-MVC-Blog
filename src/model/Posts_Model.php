@@ -6,18 +6,42 @@ class Posts_Model extends Model {
         parent::__construct();
     }
 
-    public function addPost($data) {
-        $sql = 'INSERT INTO posts(header, content, user_id) VALUES (:header, :content, :user_id)';
+    public function addPost($userId, $post_header, $post_content, $uploadedFile) {
+
+
+        // 1. Step: insert File ----------------------------------------------------------------------------------------------
+        $sql = 'INSERT INTO file (name, image, thumb, size) VALUES (:name, :image, :thumb, :size)';
+
+        $obj = $this->db->prepare($sql);
+
+        Debug::add($uploadedFile, '$uploadedFile');
+
+        $result1 = $obj->execute(array(
+            ':name' => $uploadedFile['name'],
+            ':image' => $uploadedFile['image'],
+            ':thumb' => $uploadedFile['thumb'],
+            ':size' => $uploadedFile['size'],
+        ));
+
+        // Remember the id of the new file entry
+        $file_id = $this->db->lastInsertId();
+
+
+        // 2. Step: insert Post ----------------------------------------------------------------------------------------------
+
+        $sql = 'INSERT INTO posts(header, content, user_id, file_id) VALUES (:header, :content, :user_id, :file_id)';
         
         $obj = $this->db->prepare($sql);
         
-        $result = $obj->execute(array(
-            ":header" => $data['header'],
-            ":content" => $data['content'],
-            ":user_id" => $_SESSION['user']['id'],
+        $result2 = $obj->execute(array(
+            ":header" => $post_header,
+            ":content" => $post_content,
+            ":user_id" => $userId,
+            ":file_id" => $file_id
         ));
         
-        return $result;
+
+        return $result1 && $result2;
     }
 
     public function getPosts() {

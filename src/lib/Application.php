@@ -1,7 +1,7 @@
 <?php
 
 class Application {
-
+    
     function __construct() {
 
         $url = isset($_GET['url']) ? $_GET['url'] : null;
@@ -9,18 +9,17 @@ class Application {
         $url = explode('/', $url);
 
         if (empty($url[0])) $url[0] = 'home';
-
         $url[0] = ucfirst($url[0]);
 
         //------------------------------------------------------
         // Message subsystem
 
         $messageId = isset($_GET['deleteMessage']) ? $_GET['deleteMessage'] : null;
-
         Message::remove($messageId);
 
         //------------------------------------------------------
         // Autoload controller
+
         $file = 'controller/' . $url[0] . '.php';
         if (file_exists($file)) {
             require $file;
@@ -33,7 +32,6 @@ class Application {
         //------------------------------------------------------
         // Load a Model (if exists)
         $controller->loadModel();
-
 
         //------------------------------------------------------
         // Calling Controller-Methods

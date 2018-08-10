@@ -2,25 +2,29 @@
 
 class Posts extends Controller {
     public function doAdd() {
-        $user = $_POST;
+        $post = $_POST;
+        $userId = Session::get('user')['id'];
+        $post_header = trim($post['header']);
+        $post_content = trim($post['content']);
+        $post_file = $_FILES['post_file'];
 
-        $user['header'] = trim($user['header']);
-        $user['content'] = trim($user['content']);
-
-        $data = $this->model->getPosts();
+        // $data = $this->model->getPosts();
         
-        $this->view->post = $data;
+        // $this->view->post = $data;
 
-        if(empty($user['header']) || empty($user['content'])) {
-            $this->view->post_err = 'Please fill out the complete form';
-            return $this->add();
-        }
+        // if(empty($user_header) || empty($user_content)) {
+        //     $this->view->post_err = 'Please fill out the complete form';
+        //     return $this->add();
+        // }
 
-        $this->model->addPost($user);
+        $uploadedFile = File::uploadImg($post_file);
+        $this->model->addPost($userId, $post_header, $post_content, $uploadedFile);
 
         Message::add('Perfect! New post has been added to your blog');
+
+        $this->add();
         
-        header('Location: ' . URL . 'posts');
+        // header('Location: ' . URL . 'posts');
     }
 
     public function show($id) {

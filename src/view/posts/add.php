@@ -18,12 +18,21 @@
 
     <h2>Add Post</h2>
     <p>Create a post with this form</p>
-    <form action="<?php echo URL; ?>posts/doAdd" method="POST">
+    <form action="<?php echo URL; ?>posts/doAdd" method="POST" enctype="multipart/form-data">
 
         <div class="form-group">
             <label for="title">Title: <sup>*</sup></label>
             <input type="text" name="header" class="form-control form-control-lg" value="">
         </div>         
+
+        <div class="form-group">
+            <input type="hidden" name="MAX_FILE_SIZE" value="3000000">
+
+            <div class="field">
+                <label for="title">Image Upload: <sup>*</sup></label>
+                <input type="file" name="post_file" class="btn-whatever">
+            </div>
+        </div>
 
         <div class="form-group">
             <label for="body">Body: <sup>*</sup></label>

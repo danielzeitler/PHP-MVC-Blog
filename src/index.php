@@ -17,7 +17,7 @@ include 'lib/Debug.php';
 
 include 'lib/Message.php';
 
-
+include 'lib/File.php';
 
 
 
