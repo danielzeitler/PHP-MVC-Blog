@@ -6,15 +6,12 @@ class Posts_Model extends Model {
         parent::__construct();
     }
 
-    public function addPost($userId, $post_header, $post_content, $uploadedFile) {
-
+    public function addPost($category_id, $userId, $post_header, $post_content, $uploadedFile) {
 
         // 1. Step: insert File ----------------------------------------------------------------------------------------------
         $sql = 'INSERT INTO file (name, image, thumb, size) VALUES (:name, :image, :thumb, :size)';
 
         $obj = $this->db->prepare($sql);
-
-        Debug::add($uploadedFile, '$uploadedFile');
 
         $result1 = $obj->execute(array(
             ':name' => $uploadedFile['name'],
@@ -29,7 +26,7 @@ class Posts_Model extends Model {
 
         // 2. Step: insert Post ----------------------------------------------------------------------------------------------
 
-        $sql = 'INSERT INTO posts(header, content, user_id, file_id) VALUES (:header, :content, :user_id, :file_id)';
+        $sql = 'INSERT INTO posts(header, content, user_id, file_id, category_id) VALUES (:header, :content, :user_id, :file_id, :category_id)';
         
         $obj = $this->db->prepare($sql);
         
@@ -37,7 +34,8 @@ class Posts_Model extends Model {
             ":header" => $post_header,
             ":content" => $post_content,
             ":user_id" => $userId,
-            ":file_id" => $file_id
+            ":file_id" => $file_id,
+            ":category_id" => $category_id,
         ));
         
 
@@ -45,13 +43,20 @@ class Posts_Model extends Model {
     }
 
     public function getPosts() {
-
-        $sql = 'SELECT user.firstname, user.lastname, posts.* FROM user JOIN posts ON user.id = posts.user_id;';
-
+        // $sql = 'SELECT user.firstname, user.lastname, posts.* FROM user, file JOIN posts ON user.id = posts.user_id;';
+        $sql = 'SELECT user.firstname, user.lastname, file.image, file.thumb, category.category_name, posts.*
+                FROM user
+                JOIN posts
+                ON user.id = posts.user_id
+                JOIN file
+                ON file.id = posts.file_id
+                JOIN category
+                ON category.id = posts.category_id';
+        
         $obj = $this->db->prepare($sql);
-
+        
         $obj->execute();
-
+        
         if ($obj->rowCount() > 0) {
             $data = $obj->fetchAll(PDO::FETCH_OBJ);
             return $data;
@@ -97,6 +102,20 @@ class Posts_Model extends Model {
         ));
 
         return $result;
+    }
+
+    public function getCategories() {
+        $sql = "SELECT * FROM category WHERE 1";
+        $obj = $this->db->prepare($sql);
+
+        $obj->execute();
+
+        if($obj->rowCount() > 0) {
+            $data = $obj->fetchAll(PDO::FETCH_OBJ);
+            return $data;
+        }
+
+        return false;
     }
 
 }

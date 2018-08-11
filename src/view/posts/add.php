@@ -23,7 +23,15 @@
         <div class="form-group">
             <label for="title">Title: <sup>*</sup></label>
             <input type="text" name="header" class="form-control form-control-lg" value="">
-        </div>         
+        </div>
+
+        <div class="form-group">
+            <select class="form-control" name="category_id">
+                <?php foreach ($this->data as $item): ?>
+                    <option value="<?= $item->id ?>"><?= $item->category_name ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>   
 
         <div class="form-group">
             <input type="hidden" name="MAX_FILE_SIZE" value="3000000">

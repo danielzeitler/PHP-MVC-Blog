@@ -21,7 +21,10 @@
         <ul class="navbar-nav ml-auto">
             <?php if(Session::get('user')): ?>
             <li class="nav-item">
-                <a class="nav-link" href="#">Welcome <?= Session::get('user')['firstname'] ?></a>
+                <a class="nav-link d-flex">
+                    <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/256x256/plain/user.png" width="24" height="24" class="mr-2" alt="" style="border-radius: 50%">
+                    <div>Welcome <?= Session::get('user')['firstname'] ?>   </div>
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?=URL?>auth/logout">Logout</a>

@@ -13,13 +13,14 @@
 
     <?php foreach($this->post as $item) : ?>
         <div class="card card-body mb-3">
+        <img src="<?= URL . $item->image ?>" alt="" class="card-img-top">
             <h4 class="card-title"><?= $item->header; ?></h4>
             <div class="bg-light p-2 mb-3">
-                Written by <?= $item->firstname . " " . $item->lastname ?> on <?= $item->timestamp;?>
+                Written by <?= $item->firstname . " " . $item->lastname ?> on <?= $item->timestamp;?> in category <?= $item->category_name ?>
             </div>
 
             <p class="card-text"><?= $item->content; ?></p>
             <a href="<?= URL; ?>posts/show/<?= $item->id; ?>" class="btn btn-dark">More</a>
         </div>
-    <?php endforeach; ?>
 
+<?php endforeach; ?>

@@ -3,12 +3,13 @@
 class Posts extends Controller {
     public function doAdd() {
         $post = $_POST;
+        // $getAllCategories = $this->model->getCategories();
+        $category_id = $post['category_id'];
         $userId = Session::get('user')['id'];
         $post_header = trim($post['header']);
         $post_content = trim($post['content']);
         $post_file = $_FILES['post_file'];
 
-        // $data = $this->model->getPosts();
         
         // $this->view->post = $data;
 
@@ -18,7 +19,7 @@ class Posts extends Controller {
         // }
 
         $uploadedFile = File::uploadImg($post_file);
-        $this->model->addPost($userId, $post_header, $post_content, $uploadedFile);
+        $this->model->addPost($category_id, $userId, $post_header, $post_content, $uploadedFile);
 
         Message::add('Perfect! New post has been added to your blog');
 
@@ -58,11 +59,10 @@ class Posts extends Controller {
     public function delete($id) {
         $post = $this->model->getPostById($id);
 
-     
-            $this->model->deletePost($id);
-     
-            Message::add('Post deleted', 'danger');
-            header('Location: ' . URL . 'posts');
+        $this->model->deletePost($id);
+    
+        Message::add('Post deleted', 'danger');
+        header('Location: ' . URL . 'posts');
     }
 
     public function edit($id) {
@@ -75,13 +75,15 @@ class Posts extends Controller {
     }
 
     public function add() {
+        $data = $this->model->getCategories();
+        $this->view->data = $data;
         $this->view->render('posts/add');
     }
 
     public function index() {
 
         $data = $this->model->getPosts();
-        
+
         $this->view->post = $data;
 
         $this->view->render('posts/index');
