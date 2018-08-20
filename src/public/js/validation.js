@@ -11,11 +11,11 @@ let confirmPasswordInput = document.forms["myForm"]["confirm_password"];
 let errorMsg = document.querySelectorAll('.invalid-feedback');
 let labelMsg = document.querySelectorAll('label');
 
-firstnameInput.addEventListener("keyup", checkFirstnameInput);
-lastnameInput.addEventListener("keyup", checkLastnameInput);
-emailInput.addEventListener("keyup", checkEmailInput);
-passwordInput.addEventListener("keyup", checkPassword);
-confirmPasswordInput.addEventListener("keyup", checkConfirmPassword);
+firstnameInput.addEventListener("input", checkFirstnameInput);
+lastnameInput.addEventListener("input", checkLastnameInput);
+emailInput.addEventListener("input", checkEmailInput);
+passwordInput.addEventListener("input", checkPassword);
+confirmPasswordInput.addEventListener("input", checkConfirmPassword);
 
 
 // check if firstname is empty

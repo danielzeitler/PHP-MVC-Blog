@@ -26,6 +26,7 @@
         </div>
 
         <div class="form-group">
+            <label for="category">Pick a category: <sup>*</sup></label>
             <select class="form-control" name="category_id">
                 <?php foreach ($this->data as $item): ?>
                     <option value="<?= $item->id ?>"><?= $item->category_name ?></option>
@@ -35,15 +36,15 @@
 
         <div class="form-group">
             <input type="hidden" name="MAX_FILE_SIZE" value="3000000">
+        </div>
 
-            <div class="field">
-                <label for="title">Image Upload: <sup>*</sup></label>
-                <input type="file" name="post_file" class="btn-whatever">
-            </div>
+        <div class="form-group inputDnD">
+            <label for="title">Image Upload: <sup>*</sup></label>
+            <input type="file" class="form-control-file text-upload font-weight-bold" name="post_file" id="inputFile" onchange="readUrl(this)" data-title="Click or Drag and drop a file">
         </div>
 
         <div class="form-group">
-            <label for="body">Body: <sup>*</sup></label>
+            <label for="body">Your Blog Content: <sup>*</sup></label>
             <textarea name="content" rows="15" id="post_text" class="form-control form-control-lg">  </textarea>
         </div>
         <input type="submit" class="btn btn-success" value="Submit">

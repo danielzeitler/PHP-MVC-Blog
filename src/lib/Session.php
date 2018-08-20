@@ -26,4 +26,12 @@ class Session {
             return false;
         }
     }
+
+    static public function isAdmin() {
+        if(Session::get('user')['admin']) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

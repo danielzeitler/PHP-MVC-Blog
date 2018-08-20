@@ -5,7 +5,7 @@ class Auth_Model extends Model {
     public function __construct() {
         parent::__construct();
     }
-
+ 
     public function registerUser($user) {
 
         $password = $user['password'];

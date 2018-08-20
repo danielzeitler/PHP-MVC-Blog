@@ -26,6 +26,7 @@ class Auth extends Controller {
 
             // Check if Mail already exists
             $userEntry = $this->model->getUserFromEmail($user['email']);
+            
             if ($userEntry) {
                 $data['email_err'] = 'E-Mail already exists';
             } 

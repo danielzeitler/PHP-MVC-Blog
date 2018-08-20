@@ -1,7 +1,8 @@
 
 <!-- Following Menu -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+<!-- <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark mb-3"> -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
     <div class="container">
         <a class="navbar-brand" href="<?php echo URL; ?>"><?php echo SITENAME; ?></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,11 +12,26 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-            <a class="nav-link <?= (Session::get('controller_name') == 'Home') ? 'active' : '' ?>" href="<?= URL ?>home">Home</a>
+                <a class="nav-link <?= (Session::get('controller_name') == 'Home') ? 'active' : '' ?>" href="<?= URL ?>home">Home</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link <?= (Session::get('controller_name') == 'Posts') ? 'active' : '' ?>" href="<?= URL ?>posts">Posts</a>
+                <a class="nav-link <?= (Session::get('controller_name') == 'Posts') ? 'active' : '' ?>" href="<?= URL ?>posts">Posts</a>
+            </li>
+            
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" <?= (Session::get('controller_name') == 'Posts') ? 'active' : '' ?>" href="<?= URL ?>posts">Posts</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            
+            <?php if(Session::get('user')['admin']) :  ?>
+            <li class="nav-item">
+                <a class="nav-link <?= (Session::get('controller_name') == 'Category') ? 'active' : '' ?>" href="<?= URL ?>category">Category</a>
             </li>   
+            <?php endif; ?>   
         </ul>
 
         <ul class="navbar-nav ml-auto">

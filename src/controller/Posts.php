@@ -2,30 +2,28 @@
 
 class Posts extends Controller {
     public function doAdd() {
-        $post = $_POST;
-        // $getAllCategories = $this->model->getCategories();
-        $category_id = $post['category_id'];
-        $userId = Session::get('user')['id'];
-        $post_header = trim($post['header']);
-        $post_content = trim($post['content']);
-        $post_file = $_FILES['post_file'];
-
-        
-        // $this->view->post = $data;
-
-        // if(empty($user_header) || empty($user_content)) {
-        //     $this->view->post_err = 'Please fill out the complete form';
-        //     return $this->add();
-        // }
-
-        $uploadedFile = File::uploadImg($post_file);
-        $this->model->addPost($category_id, $userId, $post_header, $post_content, $uploadedFile);
-
-        Message::add('Perfect! New post has been added to your blog');
-
-        $this->add();
-        
-        // header('Location: ' . URL . 'posts');
+            $post = $_POST;
+            // $getAllCategories = $this->model->getCategories();
+            $category_id = $post['category_id'];
+            $userId = Session::get('user')['id'];
+            $post_header = trim($post['header']);
+            $post_content = trim($post['content']);
+            $post_file = $_FILES['post_file'];
+    
+            
+            // if(empty($user_header) || empty($user_content)) {
+            //     $this->view->post_err = 'Please fill out the complete form';
+            //     return $this->add();
+            // }
+    
+            $uploadedFile = File::uploadImg($post_file);
+            $this->model->addPost($category_id, $userId, $post_header, $post_content, $uploadedFile);
+    
+            Message::add('Perfect! New post has been added to your blog');
+            
+            header('Location: ' . URL . 'posts');
+    
+       
     }
 
     public function show($id) {
@@ -56,6 +54,10 @@ class Posts extends Controller {
 
     }
 
+    public function insertCategory($title) {
+        
+    }
+
     public function delete($id) {
         $post = $this->model->getPostById($id);
 
@@ -66,7 +68,6 @@ class Posts extends Controller {
     }
 
     public function edit($id) {
-
         $post = $this->model->getPostById($id);
 
         $this->view->post = $post;
@@ -81,12 +82,13 @@ class Posts extends Controller {
     }
 
     public function index() {
+        
+            $data = $this->model->getPosts();
 
-        $data = $this->model->getPosts();
+            $this->view->post = $data;
+    
+            $this->view->render('posts/index');
 
-        $this->view->post = $data;
-
-        $this->view->render('posts/index');
     }
 
 }

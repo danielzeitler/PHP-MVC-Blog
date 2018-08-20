@@ -22,5 +22,4 @@
             <p class="card-text"><?= $item->content; ?></p>
             <a href="<?= URL; ?>posts/show/<?= $item->id; ?>" class="btn btn-dark">More</a>
         </div>
-
-<?php endforeach; ?>
+    <?php endforeach; ?>

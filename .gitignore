@@ -2,3 +2,11 @@
 # Ignore .idea folder
 
 .idea/
+/nbproject/private/
+
+src/uploads/
+
+theme/
+
+download/
+
