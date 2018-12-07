@@ -21,14 +21,17 @@ class View {
 
             require 'view/' . $name . '.php';
 
+            if(Session::get('controller_name') !== 'Dashboard') {
+                require 'partial/footer.php';
+            }
+            
             // Check DEBUG_MODE (config)
             if (DEBUG_MODE) {
                 //Draw Debug-View
                 require 'partial/debug.php';
             }
-
-            require 'partial/footer.php';
-
+            
+            require 'partial/footer_essentials.php';
 
         }
 

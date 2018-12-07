@@ -8,7 +8,9 @@ $(document).ready(function() {
         invalid_elements : "script",
 
         // Enable tinyMCE on id: post_text
-        selector: '#post_text'
+        selector: '#post_text',
+        branding: false,
+        statusbar: false
     });
 
     
@@ -29,3 +31,26 @@ function readUrl(input) {
     }  
 }
 
+let selectInputs = document.querySelectorAll('.selectInput');
+let buttonClose = document.querySelectorAll('.buttonClose');
+
+buttonClose.forEach(function(e) {
+    e.addEventListener('click', close);
+});
+
+selectInputs.forEach(function(e) {
+    e.addEventListener('click', selector);
+})
+
+function selector(e) {
+    let permissionDisplay = e.target.classList.add('d-none');
+    let selector = e.target.nextSibling.nextSibling.classList.remove('d-none');
+}
+
+function close(e) {
+    let displayPermission = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[1];
+    let removeSelectOptions = e.target.parentNode.parentNode.parentNode.parentNode;  
+
+    displayPermission.classList.remove('d-none');
+    removeSelectOptions.classList.add('d-none');  
+}

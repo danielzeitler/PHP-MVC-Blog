@@ -1,7 +1,9 @@
 
-
 <!-- Bootstrap -->
-
+<div class="col-md-12"></div>
+<div class="col-md-2"></div>
+<div class="col">
+<div class="container">
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
 <?php if(!empty(Debug::$data)): ?>
@@ -16,6 +18,9 @@
     <a class="nav-link" id="this-tab" data-toggle="tab" href="#this" role="tab" aria-controls="this" aria-selected="false">This</a>
   </li>
   <?php endif; ?>
+  <li class="nav-item">
+    <a class="nav-link" id="get-tab" data-toggle="tab" href="#get" role="tab" aria-controls="get" aria-selected="false">$_GET</a>
+  </li>
   <li class="nav-item">
     <a class="nav-link" id="post-tab" data-toggle="tab" href="#post" role="tab" aria-controls="post" aria-selected="false">$_POST</a>
   </li>
@@ -48,6 +53,10 @@
     </div>
 <?php endif; ?>
 
+    <div class="tab-pane fade" id="get" role="tabpanel" aria-labelledby="get">
+        <?php Helper::debug($_GET) ?>
+    </div>
+
     <div class="tab-pane fade" id="post" role="tabpanel" aria-labelledby="post">
         <?php Helper::debug($_POST) ?>
     </div>
@@ -60,5 +69,9 @@
     <div class="tab-pane fade" id="is-numeric-tab" role="tabpanel" aria-labelledby="<?= is_numeric($key) ? 'index'.$key : $key ?>">
         <?php Helper::debug($value) ?>
     </div>
-    <?php endforeach; ?>
+<?php endforeach; ?>
+</div>
+
+
+</div>
 </div>

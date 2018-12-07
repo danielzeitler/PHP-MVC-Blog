@@ -11,9 +11,6 @@ if (DEBUG_MODE) {
     error_reporting(E_ALL);
 }
 
-// Load Debug class
-include 'lib/Debug.php';
-
 
 include 'lib/Message.php';
 
@@ -27,7 +24,6 @@ Session::start();
 
 
 
-include 'lib/Helper.php';
 
 
 
@@ -35,7 +31,9 @@ include 'lib/Model.php';
 include 'lib/View.php';
 include 'lib/Controller.php';
 
-
+// Load Debug class
+include 'lib/Debug.php';
+include 'lib/Helper.php';
 
 include 'lib/Application.php';
 $app = new Application();

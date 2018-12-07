@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display|Roboto:400,700,900");
+body {
+  padding-top: 5rem;
+  font-family: 'roboto', sans-serif;
+}
+
+.alert-success {
+  z-index: 999;
+  width: 90%;
+}
+
+.alert-danger {
+  z-index: 999;
+  width: 90%;
+}
+
+.card-title {
+  font-family: 'Playfair', serif;
+  font-size: 36px;
+}
+
+h1 {
+  font-family: 'Playfair', serif;
+  font-size: 75px;
+}
+
+.invalid-feedback {
+  display: block;
+}
+
+iframe {
+  border: 0;
+}
+
+.landscape-img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+section {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.landscape-img {
+  height: 350px;
+  width: 100%;
+}
+
+.card-body a {
+  color: #007bff;
+}
+
+#mainNav {
+  background-color: #000;
+}
+
+a {
+  color: black;
+}
+
+td .btn {
+  width: 100%;
+}
+
+.activeNav {
+  background-color: black;
+  color: #fff;
+}
+
+/* Footer */
+footer ul li {
+  list-style-type: none;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+footer ul li a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.bg-dark {
+  background-color: #19191E !important;
+}
+
+.navbar {
+  padding: .5rem 0rem !important;
+}
+
+h2 a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+h2 a:hover {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: underline;
+}
+
+.text-faded {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+hr {
+  max-width: 50px;
+  border-width: 3px;
+  border-color: #f05f40;
+}
+
+hr.light {
+  border-color: #fff;
+}
+
+hr.dark {
+  border-color: #000;
+}
+
+.inputDnD .form-control-file {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 6em;
+  outline: none;
+  visibility: hidden;
+  cursor: pointer;
+  background-color: #c61c23;
+  -webkit-box-shadow: 0 0 5px solid currentColor;
+          box-shadow: 0 0 5px solid currentColor;
+}
+
+.text-upload {
+  color: #ced4da;
+}
+
+.section-bg {
+  background-color: #F5F5FA;
+}
+
+.inputDnD .form-control-file:before {
+  content: attr(data-title);
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  width: 100%;
+  min-height: 6em;
+  line-height: 2em;
+  padding-top: 1.5em;
+  opacity: 1;
+  visibility: visible;
+  text-align: center;
+  border: 3px dashed currentColor;
+  -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+}
+
+.inputDnD .form-control-file:hover:before {
+  border-style: solid;
+  -webkit-box-shadow: inset 0px 0px 0px 0.25em currentColor;
+          box-shadow: inset 0px 0px 0px 0.25em currentColor;
+}
+
+header.masthead {
+  text-align: left;
+  color: #fff;
+  background-image: url(../img/header-bg.jpg);
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  background-size: cover;
+  margin-top: -70px;
+}
+
+header.masthead .intro-text {
+  padding-top: 150px;
+  padding-bottom: 100px;
+}
+
+header.masthead .intro-text .intro-lead-in {
+  font-size: 22px;
+  font-style: italic;
+  line-height: 22px;
+  margin-bottom: 25px;
+}
+
+header.masthead .intro-text .intro-heading {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 50px;
+  margin-bottom: 25px;
+}
+
+@media (min-width: 768px) {
+  header.masthead .intro-text {
+    padding-top: 300px;
+    padding-bottom: 200px;
+  }
+  header.masthead .intro-text .intro-lead-in {
+    font-size: 40px;
+    font-style: italic;
+    line-height: 40px;
+    margin-bottom: 25px;
+  }
+  header.masthead .intro-text .intro-heading {
+    font-size: 75px;
+    font-weight: 700;
+    line-height: 75px;
+    margin-bottom: 50px;
+  }
+}
+
+.negativeMargin {
+  margin-top: -30px;
+  padding: 2rem 0;
+  padding-left: 25px;
+  position: fixed;
+  height: 100vh;
+  z-index: 3;
+}
+
+.nav-link {
+  cursor: pointer !important;
+}
+
+#intro-text {
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+p {
+  line-height: 1.9;
+}
+
+@media (min-width: 34em) {
+  .card-columns {
+    -webkit-column-count: 2;
+    column-count: 2;
+  }
+}
+
+@media (min-width: 64em) {
+  .card-columns {
+    -webkit-column-count: 3;
+    column-count: 3;
+  }
+}
+/*# sourceMappingURL=main.css.map */

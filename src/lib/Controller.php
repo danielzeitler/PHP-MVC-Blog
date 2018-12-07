@@ -10,7 +10,6 @@ class Controller {
         $this->view = new View();
 
         Session::set('controller_name', get_class($this));
-
     }
 
     public function loadModel() {

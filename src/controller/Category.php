@@ -1,26 +1,63 @@
 <?php
-    class Category extends Controller {
-        public function addCategory() {
-            $getCategory = $_POST['category'];
 
-            $this->model->insertCategory($getCategory);
-        }
+class Category extends Controller {
 
-        public function index() {
-            $this->view->render('category/index');
-        }
+    # *************************************************************
+    # Functions for individual category pages:
+    # Digital Minimalism, Productivity, Mind, Books and Podcasts
+    # *************************************************************
 
-        public function getCategories() {
-            $sql = "SELECT * FROM category WHERE 1";
-            $obj = $this->db->prepare($sql);
-    
-            $obj->execute();
-    
-            if($obj->rowCount() > 0) {
-                $data = $obj->fetchAll(PDO::FETCH_OBJ);
-                return $data;
-            }
-    
-            return false;
-        }
+    public function showCategory($id) {
+        Session::set('activeCategory', $id);
+        $categories = Session::get('categories');
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+        $result = $this->model->getPostsByCategoryId($id, $search);
+        $this->view->posts = $result;
+
+        $this->view->render('category/showAll');
     }
+
+
+    # **********************
+    # Comment functionality
+    # **********************
+
+    public function insertComment() {
+        $comment = $_POST;
+        # Split URL to get Id parameter
+        $getId = explode("/", $_GET['url']);
+        $postId = $getId[2];
+        # User input into comment field
+        $user_comment = $comment['user_comment'];
+
+        $this->model->userComment($user_comment, $postId);
+
+        # Redirect to same page after comment has been submitted
+        header("Location: " . URL . "category/show/$postId");
+    }
+
+    # ************************
+    # Show Post Functionality
+    # ************************
+
+    public function show($id) {
+        # Get all Data needed for post
+        $data = $this->model->getPostById($id);
+        $comments = $this->model->getAllCommentsById($id);
+
+        # Passing it into the view
+        $this->view->data = $data;
+        $this->view->comments = $comments;
+
+        $this->view->render('category/show');
+    }
+
+    # ************************
+    # Standard Index Render
+    # ************************
+
+    public function index() {
+        $this->view->render('category/digitalminimalism');
+    }
+
+}

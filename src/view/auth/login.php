@@ -2,9 +2,9 @@
     $emailError = isset($this->email_err) ? true : false;
     $emailErrorMsg = isset($this->email_err) ? $this->email_err : '';
 ?>
-
+<section>
 <div class="row">
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-8 mx-auto">
         <div class="card card-body bg-light mt-5">
 
             <!-- Error alert -->
@@ -42,3 +42,4 @@
         </div>
     </div>
 </div>
+</section>

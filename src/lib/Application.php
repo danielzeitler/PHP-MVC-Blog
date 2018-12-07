@@ -16,6 +16,13 @@ class Application {
 
         $messageId = isset($_GET['deleteMessage']) ? $_GET['deleteMessage'] : null;
         Message::remove($messageId);
+        
+        //------------------------------------------------------
+        // Stuff for Category in Navbar
+        require 'controller/Navbar.php';
+        $navbarController = new Navbar();
+        $navbarController->loadModel();
+        $navbarController->initCategories();
 
         //------------------------------------------------------
         // Autoload controller
@@ -28,6 +35,8 @@ class Application {
         }
 
         $controller = new $url[0];
+        
+
 
         //------------------------------------------------------
         // Load a Model (if exists)

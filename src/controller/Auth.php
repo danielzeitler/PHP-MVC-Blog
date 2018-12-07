@@ -3,84 +3,69 @@
 class Auth extends Controller {
 
     public function doRegister() {
-        // Check for POST 
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Process Form
+    
+        //Get credentials from POST
+        $user = $_POST;
 
-            //Get credentials from POST
-            $user = $_POST;
+        // Get user by Mail
+        $userEntry = $this->model->getUserFromEmail($user['email']);
 
-            // Init data
-            $data = [
-                'name' => trim($_POST['firstname']),
-                'lastname' => trim($_POST['lastname']),
-                'email' => trim($_POST['email']),
-                'password' => trim($_POST['password']),
-                'confirm_password' => trim($_POST['confirm_password']),
-            ];
+        // Save all emails
+        $error = array();
 
-            //Validate Email
-            if (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {
-                $data['email_err'] = 'Not a valid mail';
-            } 
-
-            // Check if Mail already exists
-            $userEntry = $this->model->getUserFromEmail($user['email']);
-            
-            if ($userEntry) {
-                $data['email_err'] = 'E-Mail already exists';
-            } 
-
-            // Validate Name
-            if(empty($data['name'])){
-                $data['name_err'] = 'Please enter first name';
-            } 
-
-            // Validate Name
-            if(empty($data['lastname'])){
-                $data['lastname_err'] = 'Please enter last name';
-            } 
-
-            // Validate Password
-            if(empty($data['password'])){
-                $data['password_err'] = 'Please enter password';
-            } elseif(strlen($data['password']) < 6){
-                $data['password_err'] = 'Password must be at least 6 characters';
-            }
-
-            // Validate Confirm Password
-            if(empty($data['confirm_password'])){
-                $data['confirm_password_err'] = 'Please confirm password';
-            } else {
-                if($data['password'] != $data['confirm_password']){
-                    $data['confirm_password_err'] = 'Passwords do not match';
-                }
-            }
-
-            // Make sure errors are empty
-            if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])) {
-                Message::add('You are registered and can now log in');
-                header('Location: ' . URL . 'auth/login');
-                // Validated
-                $this->model->registerUser($user);
-            }
+        //Validate Email
+        if (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {
+            $error['email_err'] = 'Not a valid mail';
         } 
-        $this->view->data = $data;
-        $this->register();
+
+        // Check if Mail already exists
+        if ($userEntry) {
+            $error['email_err'] = 'E-Mail already exists';
+        } 
+
+        // Validate Name
+        if(empty($user['firstname'])){
+            $error['name_err'] = 'Please enter first name';
+        } 
+
+        // Validate Name
+        if(empty($user['lastname'])){
+            $error['lastname_err'] = 'Please enter last name';
+        } 
+
+        // Validate Password
+        if(empty($user['password'])){
+            $error['password_err'] = 'Please enter password';
+        } elseif(strlen($user['password']) < 6){
+            $error['password_err'] = 'Password must be at least 6 characters';
+        }
+
+        // Validate Confirm Password
+        if(empty($user['confirm_password'])){
+            $error['confirm_password_err'] = 'Please confirm password';
+        } else {
+            if($user['password'] != $user['confirm_password']){
+                $error['confirm_password_err'] = 'Passwords do not match';
+            }
+        }
         
-    }
+        // Check for error - if no error register
+        if($error) {
+            $this->view->error = $error;
+            $this->view->formData = $user;
 
-    public function logout() {
-        // Remove userEntry from Session
-        Session::remove('user');
-        session_destroy();
+            $this->view->render('auth/register');
+        } else {
+            Message::add('You are registered and can now log in');
+            $this->model->registerUser($user);
 
-        // Change location (goto home)
-        header('Location: ' . URL . 'home');
+            // Change location (goto login)
+            header('Location: ' . URL . 'auth/login');
+        }
+        
     }
 
     public function doLogin() {
-        
             //Get credentials from POST
             $user = $_POST;
 
@@ -103,7 +88,8 @@ class Auth extends Controller {
             // Checking user entry + attempted logins
             if($userEntry && $userEntry['login_attempts'] < MAXIMUM_LOGINS) {
                 Session::set('user', $userEntry);
-
+                Session::set('user_image', $userEntry['image']);
+                
                 // Resets login attempts to 0 if login successfull
                 $resetAttempts = $this->model->resetLoginAttempts($user['email']);
                 header('Location: ' . URL . 'home');
@@ -122,7 +108,20 @@ class Auth extends Controller {
             $this->view->email_err = 'Username or Password wrong.';
             $this->login();
     }
+
+    public function logout() {
+        // Remove userEntry from Session
+        Session::remove('user');
+        session_destroy();
+
+        // Change location (goto home)
+        header('Location: ' . URL . 'home');
+    }
     
+    # *****************
+    # Render functions
+    # *****************
+
     public function login() {
         $this->view->render('auth/login');
     }
@@ -133,7 +132,7 @@ class Auth extends Controller {
     }
     
     public function index() {
-
+        $this->view->render('auth/register');
     }
 
 }
